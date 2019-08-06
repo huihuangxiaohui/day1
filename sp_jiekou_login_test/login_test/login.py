@@ -589,8 +589,3 @@ f=open(str(datetime.now().date())+"接口测试.html","wb")
 runner=HTMLTestRunnerNew.HTMLTestRunner(stream=f,title="测试报告",description="测试详情")
 runner.run(suite())
 
-
-
-
-
-

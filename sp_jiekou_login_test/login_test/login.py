@@ -1,7 +1,7 @@
 import unittest
 import requests
 import json
-import HTMLTestRunnerNew
+from sp_jiekou_login_test.HTMLTestRunner import HTMLTestRunnerNew
 from datetime import *
 class Sunpeople_test(unittest.TestCase):
     head = {"Authorization": "Bearer e76e4c67585ff33d7021bead50b9fbc4"}

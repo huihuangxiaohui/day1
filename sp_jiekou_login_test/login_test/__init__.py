@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import requests
 import json
 
@@ -18,3 +19,6 @@ def test_login4():
     print(res['error'])
     print(type(res))
 test_login4()
+=======
+
+>>>>>>> origin/master

@@ -1,8 +1,9 @@
 import unittest
 import requests
 import json
-from sp_jiekou_login_test.HTMLTestRunner import HTMLTestRunnerNew
+import HTMLTestRunnerNew
 from datetime import *
+import time
 class Sunpeople_test(unittest.TestCase):
     head = {"Authorization": "Bearer e76e4c67585ff33d7021bead50b9fbc4"}
     base_url="https://uat-sunpeopleprx-2.scgdomain.com/api/teams/all"
@@ -359,7 +360,7 @@ class Sunpeople_test(unittest.TestCase):
         self.assertEqual(json.loads(r.text)["code"], 0)
         print(url,"接口返回："+r.text)
     def test_GetSos(self):
-        '''测试是否可以新建或者更新SOS状态'''
+        '''测试是否可以打开关闭SOS'''
         url = "https://uat-sunpeopleprx-2.scgdomain.com/api/teams/all/sos"
         head = {"Authorization": "Bearer 9d98dd71f0ab7e3de06d69099a3a403f"}
         data = {
@@ -370,8 +371,14 @@ class Sunpeople_test(unittest.TestCase):
         }
 
         r = requests.post(url=url, headers=head, data=data)
+        time.sleep(6)
         self.assertEqual(json.loads(r.text)["code"], 0)
         print(url)
+        url2= "https://uat-sunpeopleprx-2.scgdomain.com/api/teams/all/sos/0"
+
+
+        c = requests.delete(url2, headers=head)
+        self.assertEqual(json.loads(c.text)["code"], 0)
     def test_Sos(self):
         """测试是否可以获取SOS状态"""
         url = "https://uat-sunpeopleprx-2.scgdomain.com/api/teams/all/sos"
@@ -379,14 +386,7 @@ class Sunpeople_test(unittest.TestCase):
         r = requests.get(url=url, headers=self.head)
         self.assertEqual(json.loads(r.text)["code"], 0)
         print(url)
-    def test_DelSos(self):
-        '''测试是否可以停止SOS求救'''
-        url = "https://uat-sunpeopleprx-2.scgdomain.com/api/teams/all/sos/0"
 
-        head = {"Authorization": "Bearer 9d98dd71f0ab7e3de06d69099a3a403f"}
-        r = requests.delete(url, headers=head)
-        self.assertEqual(json.loads(r.text)["code"], 0)
-        print(url)
     def test_KickWeb(self):
         '''测试web端推送'''
         url = "https://uat-sunpeopleprx-2.scgdomain.com/api/teams/all/web/offline"
